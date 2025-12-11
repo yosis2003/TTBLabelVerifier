@@ -1,6 +1,5 @@
 import os
 import math
-!pip install --quiet google-cloud-vision
 from collections import Counter
 from google.cloud import vision
 import re
