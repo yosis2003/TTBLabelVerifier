@@ -3,15 +3,38 @@ import { useState } from "react";
 export default function UploadPage() {
   const [file, setFile] = useState(null);
 
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    if (!file) {
-      alert("Please select a file first.");
-      return;
-    }
-    // Handle form submission logic here
-    console.log("Form submitted", { file });("Form submitted!");
-  };
+const handleSubmit = async (e) => {
+e.preventDefault();
+
+
+if (!file) {
+alert("Please upload an image file.");
+return;
+}
+
+
+const formData = new FormData();
+formData.append("file", file);
+formData.append("brandName", e.target.brandName.value);
+formData.append("productType", e.target.productType.value);
+formData.append("abv", e.target.abv.value);
+formData.append("netContents", e.target.netContents.value);
+
+
+try {
+const res = await fetch("http://localhost:8080/api/upload", {
+method: "POST",
+body: formData,
+});
+
+
+const data = await res.json();
+console.log("Server response:", data);
+} catch (err) {
+console.error("Upload failed:", err);
+}
+};
+
 
   return (
     <div className="min-h-screen bg-gray-100 p-6">
@@ -32,6 +55,7 @@ export default function UploadPage() {
               <label className="block mb-1 font-medium">Brand Name</label>
               <input
                 type="text"
+                name="brandName"
                 className="w-full p-3 border rounded-xl focus:outline-none focus:ring"
                 placeholder="Corona, Modelo, Yousif's Alcohol Conglomerate, etc."
                 required
@@ -42,6 +66,7 @@ export default function UploadPage() {
               <label className="block mb-1 font-medium">Product Type</label>
               <input
                 type="text"
+                name="productType"
                 className="w-full p-3 border rounded-xl focus:outline-none focus:ring"
                 placeholder="Cabernet Sauvignon, Bourbon Whiskey, etc."
                 required
@@ -49,9 +74,11 @@ export default function UploadPage() {
             </div>
 
             <div>
-              <label className="block mb-1 font-medium">Alcohol by Volume Percentage</label>
+              <label className="block mb-1 font-medium">Alcohol by Volume Percentage (ABV %)</label>
               <input
-                type="email"
+                type="number"
+                step="0.1"
+                name="abv"
                 className="w-full p-3 border rounded-xl focus:outline-none focus:ring"
                 placeholder="Enter number only"
                 required
@@ -61,7 +88,8 @@ export default function UploadPage() {
             <div>
               <label className="block mb-1 font-medium">Net Contents</label>
               <input
-                type="tel"
+                type="number"
+                name="netContents"
                 className="w-full p-3 border rounded-xl focus:outline-none focus:ring"
                 placeholder="Enter total content in mL"
                 required
@@ -73,6 +101,7 @@ export default function UploadPage() {
               <input
                 type="file"
                 onChange={(e) => setFile(e.target.files[0])}
+                name="photo"
                 className="w-full p-3 border rounded-xl focus:outline-none focus:ring"
                 required
               />
