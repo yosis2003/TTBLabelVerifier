@@ -16,6 +16,7 @@ export default function UploadPage() {
       return;
     }
 
+
     const form = e.currentTarget;
     const formData = new FormData();
 
@@ -25,14 +26,13 @@ export default function UploadPage() {
     formData.append("productType", (form.elements.namedItem("productType") as HTMLInputElement).value || "");
     formData.append("abv", (form.elements.namedItem("abv") as HTMLInputElement).value || "");
     formData.append("netContents", (form.elements.namedItem("netContents") as HTMLInputElement).value || "");
-
     try {
       setLoading(true);
 
-      const res = await fetch("http://localhost:8080/api/upload", {
-        method: "POST",
-        body: formData,
-      });
+      const res = await fetch("https://flask-backend-727610799062.us-central1.run.app/api/upload", {
+    method: "POST",
+    body: formData
+});
 
       if (!res.ok) {
         const text = await res.text();
@@ -67,9 +67,11 @@ export default function UploadPage() {
               <label className="block mb-1 font-medium">Brand Name</label>
               <input
                 type="text"
+                required
                 name="brandName"
                 className="w-full p-3 border rounded-xl focus:outline-none focus:ring"
                 placeholder="Corona, Modelo, etc."
+                
               />
             </div>
 
@@ -77,6 +79,7 @@ export default function UploadPage() {
               <label className="block mb-1 font-medium">Product Type</label>
               <input
                 type="text"
+                required
                 name="productType"
                 className="w-full p-3 border rounded-xl focus:outline-none focus:ring"
                 placeholder="Cabernet Sauvignon, Bourbon Whiskey, etc."
@@ -170,7 +173,7 @@ export default function UploadPage() {
               )}
             </div>
           ) : (
-            <p>Additional content will go here.</p>
+            <p>Matching results will appear here once you submit the form.</p>
           )}
         </div>
       </div>

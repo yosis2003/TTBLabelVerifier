@@ -114,7 +114,7 @@ def compare_values(label_value, detected_value, field_name):
         return {
             "match": False,
             "value_found": None,
-            "message": f"{field_name} not found in label."
+            "message": f"{field_name} entered via form is not found in provided label image"
         }
 
     # Normalize numeric comparisons
@@ -126,20 +126,20 @@ def compare_values(label_value, detected_value, field_name):
             return {
                 "match": False,
                 "value_found": detected_value,
-                "message": "Unable to compare ABV values."
+                "message": "Unable to compare ABV values"
             }
 
         if abs(label_val_num - detected_num) < 0.01:
             return {
                 "match": True,
                 "value_found": detected_value,
-                "message": "ABV matches label."
+                "message": "ABV matches label"
             }
         else:
             return {
                 "match": False,
                 "value_found": detected_value,
-                "message": f"ABV does not match. Detected {detected_value}."
+                "message": f"ABV does not match. Detected {detected_value} instead"
             }
 
     # String comparison for brand + type
@@ -153,7 +153,7 @@ def compare_values(label_value, detected_value, field_name):
     return {
         "match": False,
         "value_found": detected_value,
-        "message": f"{field_name} does not match. Found '{detected_value}'."
+        "message": f"{field_name} does not match. Found '{detected_value}' instead."
     }
 
 
