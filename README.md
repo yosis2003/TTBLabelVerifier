@@ -16,13 +16,13 @@ but the only name that is found in the image is **Tommy**, the program assumes t
 
 The ABV% works by exploiting a pattern in alcohol labels, where a % is usually present within the label. The program looks for this number succeeded by the % sign, and sees whether it matches, to the 10ths place, the measurement entered in the form.
 
-Finally, the program detects any numbers int the provided image succeeded by any of the following volume units:
+Finally, the program detects any numbers in the provided image succeeded by any of the following volume units:
 
 **fl oz, oz (assuming the beverage is the same density as water), liters, milliliters, and centiliters**
 
 Simply input the amount that you want to verify in milliliters, and the program will compare the inputted value to the one detected, and make all (if any) conversions necessary to tell you whether there is a match.
 
-After the form is submitted, a results page will appear to the right of the form. This will include match or hit data for each field. For the numerical values, if a number is detected at all with the correct format (i.e. a % or a valid volume unit preceded by a number), and that number does **not** match the form's, then that number will be shown for the user's convenicence. Additionally, the entirety of the texts detected in the label will be displayed at the bottom right of the page for the user's diagnostic intents.
+After the form is submitted, a results page will appear to the right of the form. This will include match or hit data for each field. For the numerical values, if a number is detected at all with the correct format (i.e. a % or a valid volume unit preceded by a number), and that number does **not** match the form's, then that number will be shown for the user's convenience. Additionally, the entirety of the texts detected in the label will be displayed at the bottom right of the page for the user's diagnostic intents.
 
 
 Note: The label detection is not 100% accurate. OCR technology has come very far, and the best model is being used for this
